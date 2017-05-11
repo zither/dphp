@@ -31,7 +31,7 @@ RUN apk add php5 \
     php5-curl \
     php5-ctype \
     php5-phar \
-    php5-redis@testing \
+#php5-redis@testing \
     php5-xdebug@community \
     openssl
 
