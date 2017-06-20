@@ -1,4 +1,14 @@
 version: '2'
+
+networks:
+    lan_0:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.19.0.0/24
+                - gateway: 172.19.0.21
+
 services:
 
   # 公共镜像，只配置了国内镜像加速和中国时区配置
@@ -43,7 +53,12 @@ services:
         # - redis
     volumes:
       - "./volumes/apps:/apps"
-    restart: always
+    restart: always'
+    extra_hosts:
+        - "pizza.app:172.19.0.22"
+    networks:
+        lan_0:
+            ipv4_address: 172.19.0.23
 
   # php7配置
   # phpfpm7:
@@ -71,3 +86,6 @@ services:
     ports:
       - "80:80"
     restart: always
+    networks:
+        lan_0:
+            ipv4_address: 172.19.0.22
